@@ -1,8 +1,17 @@
 matrix_pearson = function(X, Y) {
+    if (is.vector(X)) {
+        X = matrix(X, ncol=1)
+    }
+    if (is.vector(Y)) {
+        Y = matrix(Y, ncol=1)
+    }
     n = nrow(X)
-    covariance = n*colSums(X*Y) - colSums(X)*colSums(Y)
-    var_X = n*colSums(X^2) - colSums(X)^2
-    var_Y = n*colSums(Y^2) - colSums(Y)^2
-    log_rho = log(covariance) - 0.5*log(var_X) - 0.5*log(var_Y)
-    return(exp(log_rho))
+    cov_mat = matrix(NA_real_, nrow=ncol(X), ncol=ncol(Y))
+    cntrd_X = t(t(X) - colMeans(X))
+    cntrd_Y = t(t(Y) - colMeans(Y))
+    for (i in 1:ncol(X)) {
+        product = cntrd_X[, i] * cntrd_Y
+        cov_mat[i,] = colSums(product) / (n - 1)
+    }
+    return(cov_mat)
 }
