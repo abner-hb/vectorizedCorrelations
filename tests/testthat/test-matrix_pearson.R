@@ -31,6 +31,38 @@ test_that("pearson works", {
         cov(X, Y),
         matrix_pearson(X, Y)
     )
+    # Case 5
+    set.seed(20)
+    X = matrix(rnorm(1000*100), nrow=1000, ncol=100)
+    Y = rcauchy(1000)
+    expect_equal(
+        cov(X, Y),
+        matrix_pearson(X, Y)
+    )
+    # Case 6
+    set.seed(20)
+    X = rcauchy(1000)
+    Y = matrix(rnorm(1000*100), nrow=1000, ncol=100)
+    expect_equal(
+        cov(X, Y),
+        matrix_pearson(X, Y)
+    )
+    # Case 6
+    set.seed(20)
+    X = rcauchy(1000)
+    Y = rcauchy(1000)
+    expect_equal(
+        cov(X, Y),
+        matrix_pearson(X, Y)
+    )
+    # Case 7
+    set.seed(20)
+    X = matrix(rgamma(73*5000, shape = 10), ncol = 73, nrow=5000)
+    Y = X + sample.int(100, size=73*5000, replace = TRUE)
+    expect_equal(
+        cov(X, Y),
+        matrix_pearson(X, Y)
+    )
 })
 
 # test_matrix_pearson = function(reps){

@@ -13,5 +13,8 @@ matrix_pearson = function(X, Y) {
         product = cntrd_X[, i] * cntrd_Y
         cov_mat[i,] = colSums(product) / (n - 1)
     }
+    if (all(dim(cov_mat) == c(1,1))) {
+        cov_mat = cov_mat[1,1]
+    }
     return(cov_mat)
 }
