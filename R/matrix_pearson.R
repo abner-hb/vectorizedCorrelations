@@ -15,9 +15,9 @@ matrix_pearson = function(X, Y) {
     corr_mat = matrix(NA_real_, nrow=ncol(X), ncol=ncol(Y))
     for (i in 1:ncol(X)) {
         # Computing covariances
-        covariance_vec = cntrd_X[, i] * cntrd_Y
+        covariance_vec = colSums(cntrd_X[, i] * cntrd_Y)
         # Compute correlations
-        corr_mat[i,] = colSums(covariance_vec) / (Xstd_vec[i]*Ystd_vec)
+        corr_mat[i,] = covariance_vec / (Xstd_vec[i]*Ystd_vec)
     }
     # Convert 1 by 1 matrix to number
     if (all(dim(corr_mat) == c(1,1))) {
