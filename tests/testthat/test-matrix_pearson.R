@@ -47,7 +47,7 @@ test_that("pearson works", {
         cor(X, Y),
         matrix_pearson(X, Y)
     )
-    # Case 6
+    # Case 7
     set.seed(20)
     X = rcauchy(1000)
     Y = rcauchy(1000)
@@ -55,12 +55,28 @@ test_that("pearson works", {
         cor(X, Y),
         matrix_pearson(X, Y)
     )
-    # Case 7
+    # Case 8
     set.seed(20)
     X = matrix(rgamma(73*5000, shape = 10), ncol = 73, nrow=5000)
     Y = X + sample.int(100, size=73*5000, replace = TRUE)
     expect_equal(
         cor(X, Y),
+        matrix_pearson(X, Y)
+    )
+    # Case 9
+    set.seed(29)
+    X = matrix(rnorm(100), nrow=10)
+    Y = X
+    expect_equal(
+        cor(X, Y),
+        matrix_pearson(X, Y)
+    )
+    # Case 10
+    set.seed(29)
+    X = data.frame(matrix(rnorm(100), nrow=10))
+    Y = X
+    expect_equal(
+        unname(cor(X, Y)),
         matrix_pearson(X, Y)
     )
 })

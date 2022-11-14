@@ -1,10 +1,10 @@
 matrix_pearson = function(X, Y) {
-    if (is.vector(X)) {
-        X = matrix(X, ncol=1)
-    }
-    if (is.vector(Y)) {
-        Y = matrix(Y, ncol=1)
-    }
+    # if (is.vector(X)) {
+    #     X = matrix(X, ncol=1)
+    # }
+    # if (is.vector(Y)) {
+    #     Y = matrix(Y, ncol=1)
+    # }
     n = nrow(X)
     # Center matrices
     cntrd_X = t(t(X) - colMeans(X))

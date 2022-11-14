@@ -1,8 +1,4 @@
 matrix_kendall = function(X, Y){
-    # Ensure Y is a matrix
-    if (is.vector(Y)) {
-        Y = matrix(Y, nrow=nrow(X), ncol=ncol(X))
-    }
     # Transpose so I can use row operations
     X = t(X)
     Y = t(Y)
@@ -11,8 +7,9 @@ matrix_kendall = function(X, Y){
         conc_pairs[] = conc_pairs +
             # Both entries are smaller
             rowSums(
-                (X[, i - 1] < X[, i:ncol(X), drop=FALSE])*
-                    (Y[, i - 1] < Y[, i:ncol(X), drop=FALSE])
+                # Counting the equal cases allows to consider ties
+                (X[, i - 1] <= X[, i:ncol(X), drop=FALSE])*
+                    (Y[, i - 1] <= Y[, i:ncol(X), drop=FALSE])
             ) +
             # Both entries are bigger
             rowSums(
