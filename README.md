@@ -5,7 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/abner-hb/vectorizedCorrelations/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/abner-hb/vectorizedCorrelations/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/abner-hb/vectorizedCorrelations/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/abner-hb/vectorizedCorrelations/actions/workflows/R-CMD-check.yaml)(<https://codecov.io/gh/abner-hb/vectorizedCorrelations/settings/codecov>)
+[![Codecov test
+coverage](https://codecov.io/gh/abner-hb/vectorizedCorrelations/branch/main/graph/badge.svg)](https://app.codecov.io/gh/abner-hb/vectorizedCorrelations?branch=main)
 <!-- badges: end -->
 
 The goal of vectorizedCorrelations is to …
