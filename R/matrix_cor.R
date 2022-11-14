@@ -1,3 +1,20 @@
+#' matrix_cor
+#'
+#' compute the correlation between the columns of X and the columns $Y$.
+#'
+#' @param X A matrix
+#' @param Y A matrix
+#' @param method A string
+#'
+#' @return For `method = "pearson"`, returns an object the same type of `X`
+#' containing the correlation between all the columns of `X` and all the
+#' columns of `Y`.
+#'
+#' @export
+#'
+#' @examples
+#' matrix_cor(rnorm(20), rnorm(20), method="pearson")
+#' matrix_cor(matrix (c(1, 2, 2, 1), 2, 2), c(1,2), method="kendall")
 matrix_cor = function(X, Y, method = "pearson") {
     # Check that matrices are numerical
     if (!(is.numeric(X) & is.numeric(Y))) {

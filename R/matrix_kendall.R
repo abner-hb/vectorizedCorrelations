@@ -1,3 +1,17 @@
+#' matrix_kendall
+#'
+#' @param X A matrix or data.frame
+#' @param Y A matrix or data.frame
+#'
+#' @return returns a matrix `X` containing the correlation
+#'  between all the columns of `X` and all the columns of `Y`.
+#'
+#' @noRd
+#'
+#' @examples
+#' matrix_kendall(matrix(c(1, 2, 2, 1), 2, 2), c(1, 2))
+#' matrix_kendall(matrix(rnorm(100), nrow=10), matrix(rnorm(100), nrow=10))
+#'
 matrix_kendall = function(X, Y){
     # Transpose so I can use row operations
     X = t(X)

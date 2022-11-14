@@ -1,3 +1,16 @@
+#' matrix_pearson
+#'
+#' @param X A matrix
+#' @param Y A matrix
+#'
+#' @return returns a matrix `X` containing the correlation
+#'  between all the columns of `X` and all the columns of `Y`.
+#'
+#' @noRd
+#'
+#' @examples
+#' matrix_pearson(matrix(rnorm(10), nrow=10, ncol=1), matrix(rnorm(10), nrow=10, ncol=1))
+#'
 matrix_pearson = function(X, Y) {
     # if (is.vector(X)) {
     #     X = matrix(X, ncol=1)

@@ -107,4 +107,12 @@ test_that("matrix_cor works", {
         matrix_cor(X, Y, method="pearson"),
         cor(X, Y, method = "pearson")
     )
+    # Case 15
+    set.seed(20)
+    X = matrix(rnorm(1000*100), nrow=1000, ncol=100)
+    Y = rcauchy(1000)
+    expect_equal(
+        cor(X, Y),
+        matrix_cor(X, Y, "pearson")
+    )
 })
