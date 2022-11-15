@@ -1,0 +1,119 @@
+---
+title: "vectorizedCorrelations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vectorizedCorrelations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(vectorizedCorrelations)
+```
+
+`vectorizedCorrelations` computes correlations using only basic arithmetic operations and (in some cases) matrix transposition native to `R`. The function `matrix_cor()` can compute two types of correlation coefficients: [*pearson*](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) correlation, and [*kendall*](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient) rank correlation.
+
+## Pearson correlation
+
+You can get the pearson correlation coefficient between the columns of two matrices. 
+
+```{r}
+set.seed(1120)
+a = matrix(rnorm(5*3, mean = 10, sd = 1), nrow=5, ncol=3)
+b = 2*a + rnorm(5*3, mean = 1, sd = 0.1)
+matrix_cor(a, b, "pearson")
+```
+
+In the output above, the entry [*i*, *j*] corresponds to the correlation between column *i* in matrix *a* and column *j* in matrix *b*. So, for example, the entry [2, 3] is the correlation between the second column of *a* and the third column of *b*.
+
+Compare this result to the one from `stats::cor()`
+
+```{r}
+stats::cor(a, b, method = "pearson")
+```
+
+You can also use two vectors:
+
+```{r}
+set.seed(1120)
+a = rnorm(5*3, mean = 10, sd = 1)
+b = 2*a + rnorm(5*3, mean = 5, sd = 2)
+matrix_cor(a, b, "pearson")
+```
+
+or one vector and one matrix
+
+```{r}
+set.seed(1120)
+a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow=10, ncol=4)
+b = 2*a[, 1]
+matrix_cor(a, b, "pearson")
+# Or
+matrix_cor(b, a, "pearson")
+```
+
+It is also possible to get the correlation matrix for a single matrix by passing only the first matrix and the method:
+
+```{r}
+set.seed(1120)
+a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow=10, ncol=4)
+matrix_cor(a, method="pearson")
+```
+
+In most cases, the output in `matrix_cor()` has the same format as that of `stats::cor()`. The differences occur when you pass a vector in matrix format:
+
+```{r}
+set.seed(20)
+a = matrix(rnorm(7), nrow=7, ncol=1)
+b = matrix(rnorm(7), nrow=7, ncol=1)
+matrix_cor(a, b, method = "pearson")
+cor(a, b, method = "pearson")
+```
+
+Here, `matrix_cor()` outputs a vector of length 1, while `stats::cor()` outputs a matrix of dimensions (1, 1).
+
+## Kendall rank correlation
+
+To get the kendall rank correlation, you can use `method = "kendall"`. 
+
+```{r}
+set.seed(854)
+a = matrix(rnorm(10*10), nrow=10, ncol=10)
+b = matrix(rnorm(10*10), nrow=10, ncol=10)
+matrix_cor(a, b, "kendall")
+```
+
+Note that in this case `matrix_cor()` is more limited: it only outputs a vector where the element *i* corresponds to the kendall correlation between column *i* of the first matrix and the column *i* of the second matrix.
+
+Even so, it is still possible to pass two vectors:
+
+```{r}
+set.seed(1120)
+a = rnorm(5*3, mean = 10, sd = 1)
+b = 2*a + rnorm(5*3, mean = 5, sd = 2)
+matrix_cor(a, b, "kendall")
+```
+
+or one vector and one matrix:
+
+```{r}
+set.seed(1120)
+a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow=10, ncol=4)
+b = 2*a[, 1]
+matrix_cor(a, b, "kendall")
+matrix_cor(b, a, "kendall")
+```
+
+
+
+
+
+
+

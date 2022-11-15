@@ -115,4 +115,18 @@ test_that("matrix_cor works", {
         cor(X, Y),
         matrix_cor(X, Y, "pearson")
     )
+    # Case 16
+    set.seed(20)
+    X = matrix(rnorm(10*5), nrow=10, ncol=5)
+    expect_equal(
+        cor(X),
+        matrix_cor(X, method="pearson")
+    )
+    # Case 16
+    set.seed(20)
+    X = matrix(rnorm(10*5), nrow=10, ncol=5)
+    expect_equal(
+        diag(cor(X, method="kendall")),
+        matrix_cor(X, method="kendall")
+    )
 })

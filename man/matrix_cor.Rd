@@ -2,24 +2,28 @@
 % Please edit documentation in R/matrix_cor.R
 \name{matrix_cor}
 \alias{matrix_cor}
-\title{matrix_cor}
+\title{Correlation matrices}
 \usage{
-matrix_cor(X, Y, method = "pearson")
+matrix_cor(X, Y = NULL, method = "pearson")
 }
 \arguments{
-\item{X}{A matrix}
+\item{X}{A matrix or a vector}
 
-\item{Y}{A matrix}
+\item{Y}{A matrix or a vector}
 
 \item{method}{A string}
 }
 \value{
-For `method = "pearson"`, returns an object the same type of `X`
-containing the correlation between all the columns of `X` and all the
-columns of `Y`.
+For `method = "pearson"`, returns a matrix containing the pearson
+  correlation coefficient between all the columns of `X` and all the columns
+  of `Y`.
+
+  For `method = "kendall"`, returns a *vector* containing the kendall rank
+  correlation between columns of `X` and the corresponding columns of `Y`.
 }
 \description{
-compute the correlation between the columns of X and the columns $Y$.
+`matrix_cor()` computes the correlation between the columns of
+  `X` and the columns of `Y`.
 }
 \examples{
 matrix_cor(rnorm(20), rnorm(20), method="pearson")
