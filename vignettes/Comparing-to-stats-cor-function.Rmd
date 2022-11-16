@@ -53,7 +53,7 @@ set.seed(950)
 a = matrix(rnorm(30*50), nrow = 30, ncol = 50)
 b = matrix(rnorm(30*50), nrow = 30, ncol = 50)
 
-result = microbenchmark::microbenchmark(
+result = microbenchmark(
     matrix_cor(a, b, method = "pearson"),
     cor(a, b, method = "pearson")
 )
@@ -65,10 +65,10 @@ However, as the sizes of the matrices increase, the difference in time decreases
 
 ```{r}
 set.seed(950)
-a = matrix(rnorm(300*500), nrow = 300, ncol = 500)
-b = matrix(rnorm(300*500), nrow = 300, ncol = 500)
+a = matrix(rnorm(100*300), nrow = 100, ncol = 300)
+b = matrix(rnorm(100*300), nrow = 100, ncol = 300)
 
-result = microbenchmark::microbenchmark(
+result = microbenchmark(
     matrix_cor(a, b, method = "pearson"),
     cor(a, b, method = "pearson")
 )
@@ -86,7 +86,7 @@ set.seed(950)
 a = matrix(rnorm(30*50), nrow = 30, ncol = 50)
 b = matrix(rnorm(30*50), nrow = 30, ncol = 50)
 
-result = microbenchmark::microbenchmark(
+result = microbenchmark(
     matrix_cor(a, b, method = "kendall"),
     cor(a, b, method = "kendall")
 )
@@ -97,10 +97,10 @@ When the size of the matrices increases, the difference in time decreases. In th
 
 ```{r}
 set.seed(950)
-a = matrix(rnorm(50*100), nrow = 50, ncol = 100)
-b = matrix(rnorm(50*100), nrow = 50, ncol = 100)
+a = matrix(rnorm(50*80), nrow = 50, ncol = 80)
+b = matrix(rnorm(50*80), nrow = 50, ncol = 80)
 
-result = microbenchmark::microbenchmark(
+result = microbenchmark(
     matrix_cor(a, b, method = "kendall"),
     cor(a, b, method = "kendall"),
     times = 50

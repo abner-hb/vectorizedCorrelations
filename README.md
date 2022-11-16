@@ -10,8 +10,8 @@
 coverage](https://codecov.io/gh/abner-hb/vectorizedCorrelations/branch/main/graph/badge.svg)](https://app.codecov.io/gh/abner-hb/vectorizedCorrelations?branch=main)
 <!-- badges: end -->
 
-The goal of vectorizedCorrelations is to learn how to compute
-correlations using only basic R operations and vectorization.
+The goal of vectorizedCorrelations is to compute correlations using only
+basic R operations and vectorization.
 
 ## Installation
 
