@@ -25,14 +25,16 @@ devtools::install_github("abner-hb/vectorizedCorrelations")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ``` r
 library(vectorizedCorrelations)
 library(datasets)
 
 A = cars[, 1]
 B = cars[, 2]
+# Pearson correlation
 matrix_cor(A, B, method = "pearson")
 #> [1] 0.8068949
+# Kendall correlation
+matrix_cor(A, B, method = "kendall")
+#> [1] 0.7093878
 ```

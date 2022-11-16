@@ -1,0 +1,130 @@
+---
+title: "Comparing to stats::cor() function"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comparing-to-stats-cor-function}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(vectorizedCorrelations)
+library(microbenchmark)
+```
+
+`matrix_cor()` is implemented using only basic R operations. In this vignette I briefly compare the precision and speed of `matrix_cor()` with `stats::cor()`.
+
+## Comparing precision
+
+Results from `matrix_cor()` are reasonably close to `stats::cor()` for both types of correlation: 
+
+```{r}
+set.seed(20)
+X = matrix(rcauchy(1000*10), nrow = 1000, ncol = 10)
+Y = matrix(rcauchy(1000*10), nrow = 1000, ncol = 10)
+all.equal(
+    cor(X, Y, method = "pearson"),
+    matrix_cor(X, Y, method = "pearson"),
+    tolerance = 1.5e-30
+)
+
+all.equal(
+    diag(cor(X, Y, method = "kendall")),
+    matrix_cor(X, Y, method = "kendall"),
+    tolerance = 1.5e-30
+)
+```
+
+## Comparing speed
+
+### Pearson correlation
+
+`matrix_cor()` is slower than `stats::cor()`. For small matrices, the difference in speed is relatively large. `stats::cor()` is roughly 5 times faster than `matrix_cor()`:
+
+```{r}
+set.seed(950)
+a = matrix(rnorm(30*50), nrow = 30, ncol = 50)
+b = matrix(rnorm(30*50), nrow = 30, ncol = 50)
+
+result = microbenchmark::microbenchmark(
+    matrix_cor(a, b, method = "pearson"),
+    cor(a, b, method = "pearson")
+)
+print(result)
+```
+
+
+However, as the sizes of the matrices increase, the difference in time decreases. In the example below, `stats::cor()` is "only" 3.5 times faster than `matrix_cor()`.
+
+```{r}
+set.seed(950)
+a = matrix(rnorm(300*500), nrow = 300, ncol = 500)
+b = matrix(rnorm(300*500), nrow = 300, ncol = 500)
+
+result = microbenchmark::microbenchmark(
+    matrix_cor(a, b, method = "pearson"),
+    cor(a, b, method = "pearson")
+)
+print(result)
+```
+
+### Kendall correlation
+
+Comparing the speed of the two functions when computing kendall correlations is slightly more complicated because `stats::cor()` works more. `stats::cor()` computes the entire matrix of correlations, whereas `matrix_cor()` computes only the diagonal of the matrix.
+
+Still, a rough comparison is possible. In the example below, `matrix_cor()` takes roughly 0.04 milliseconds per correlation, while `stats::cor()` takes roughly 0.015 milliseconds. In other words, `stats::cor()` seems 2.5 times faster than `matrix_cor()`. 
+
+```{r}
+set.seed(950)
+a = matrix(rnorm(30*50), nrow = 30, ncol = 50)
+b = matrix(rnorm(30*50), nrow = 30, ncol = 50)
+
+result = microbenchmark::microbenchmark(
+    matrix_cor(a, b, method = "kendall"),
+    cor(a, b, method = "kendall")
+)
+print(result)
+```
+
+When the size of the matrices increases, the difference in time decreases. In the example below (following the same reasoning as above), `stats::cor()` is roughly 1.5 faster than `matrix_cor()`.
+
+```{r}
+set.seed(950)
+a = matrix(rnorm(50*100), nrow = 50, ncol = 100)
+b = matrix(rnorm(50*100), nrow = 50, ncol = 100)
+
+result = microbenchmark::microbenchmark(
+    matrix_cor(a, b, method = "kendall"),
+    cor(a, b, method = "kendall"),
+    times = 50
+)
+print(result)
+```
+
+
+## Other limitations
+
++ `matrix_cor()` cannot compute the spearman correlation coefficient. 
+
++ As mentioned above, when `method = "kendall"`, `stats::cor()` computes the entire matrix of correlations, whereas `matrix_cor()` computes only the diagonal of the matrix. More specifically, `matrix_cor()` only outputs a vector where the element *i* corresponds to the kendall correlation between column *i* of the first matrix and the column *i* of the second matrix.
+
++ `matrix_cor()` always uses every observation, so missing values propagate (see below). `stats::cor()` provides several alternatives for dealing with missing values. Thus, when there are missing values, `matrix_cor()` is equal to `stats::cor()` if you pass `use = "everything"` (the default) in `stats::cor()`.
+
+```{r}
+set.seed(950)
+a = matrix(rnorm(9*4), nrow = 9, ncol = 4)
+a[1, 3] = NA
+b = matrix(rnorm(9*4), nrow = 9, ncol = 4)
+matrix_cor(a, b, method = "pearson")
+```
+
+
+
+

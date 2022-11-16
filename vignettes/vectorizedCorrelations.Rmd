@@ -52,7 +52,7 @@ or one vector and one matrix
 
 ```{r}
 set.seed(1120)
-a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow=10, ncol=4)
+a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow = 10, ncol = 4)
 b = 2*a[, 1]
 matrix_cor(a, b, "pearson")
 # Or
@@ -63,7 +63,7 @@ It is also possible to get the correlation matrix for a single matrix by passing
 
 ```{r}
 set.seed(1120)
-a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow=10, ncol=4)
+a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow = 10, ncol = 4)
 matrix_cor(a, method="pearson")
 ```
 
@@ -71,8 +71,8 @@ In most cases, the output in `matrix_cor()` has the same format as that of `stat
 
 ```{r}
 set.seed(20)
-a = matrix(rnorm(7), nrow=7, ncol=1)
-b = matrix(rnorm(7), nrow=7, ncol=1)
+a = matrix(rnorm(7), nrow = 7, ncol = 1)
+b = matrix(rnorm(7), nrow = 7, ncol = 1)
 matrix_cor(a, b, method = "pearson")
 cor(a, b, method = "pearson")
 ```
@@ -85,8 +85,8 @@ To get the kendall rank correlation, you can use `method = "kendall"`.
 
 ```{r}
 set.seed(854)
-a = matrix(rnorm(10*10), nrow=10, ncol=10)
-b = matrix(rnorm(10*10), nrow=10, ncol=10)
+a = matrix(rnorm(10*10), nrow = 10, ncol = 10)
+b = matrix(rnorm(10*10), nrow = 10, ncol = 10)
 matrix_cor(a, b, "kendall")
 ```
 
@@ -105,7 +105,7 @@ or one vector and one matrix:
 
 ```{r}
 set.seed(1120)
-a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow=10, ncol=4)
+a = matrix(rnorm(10*4, mean = 10, sd = 1), nrow = 10, ncol = 4)
 b = 2*a[, 1]
 matrix_cor(a, b, "kendall")
 matrix_cor(b, a, "kendall")
