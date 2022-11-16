@@ -14,16 +14,16 @@ matrix_cor(X, Y = NULL, method = "pearson")
 \item{method}{A string}
 }
 \value{
-For `method = "pearson"`, returns a matrix containing the pearson
-  correlation coefficient between all the columns of `X` and all the columns
-  of `Y`.
+For \code{method = "pearson"}, returns a matrix containing the pearson
+correlation coefficient between all the columns of \code{X} and all the columns
+of \code{Y}.
 
-  For `method = "kendall"`, returns a *vector* containing the kendall rank
-  correlation between columns of `X` and the corresponding columns of `Y`.
+For \code{method = "kendall"}, returns a \emph{vector} containing the kendall rank
+correlation between columns of \code{X} and the corresponding columns of \code{Y}.
 }
 \description{
-`matrix_cor()` computes the correlation between the columns of
-  `X` and the columns of `Y`.
+\code{matrix_cor()} computes the correlation between the columns of
+\code{X} and the columns of \code{Y}.
 }
 \examples{
 matrix_cor(rnorm(20), rnorm(20), method="pearson")
