@@ -1,7 +1,7 @@
 Package: vectorizedCorrelations
 Type: Package
 Title: Computes Pearson and Kendall Correlations
-Version: 0.5.0
+Version: 0.5.1
 Author: Abner Heredia Bustos
 Maintainer: Abner Heredia Bustos <113459290+abner-hb@users.noreply.github.com>
 Description: Compute correlations using only basic R operations and 

@@ -7,6 +7,9 @@
 #' @param Y A matrix or a vector
 #' @param method A string
 #'
+#' @details To learn more about this package, start with the vignettes:
+#'  `browseVignettes(package = "vectorizedCorrelations")`
+#'
 #' @return For `method = "pearson"`, returns a matrix containing the pearson
 #'   correlation coefficient between all the columns of `X` and all the columns
 #'   of `Y`.

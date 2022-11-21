@@ -25,6 +25,10 @@ correlation between columns of \code{X} and the corresponding columns of \code{Y
 \code{matrix_cor()} computes the correlation between the columns of
 \code{X} and the columns of \code{Y}.
 }
+\details{
+To learn more about this package, start with the vignettes:
+\code{browseVignettes(package = "vectorizedCorrelations")}
+}
 \examples{
 matrix_cor(rnorm(20), rnorm(20), method="pearson")
 matrix_cor(matrix (c(1, 2, 2, 1), 2, 2), c(1,2), method="kendall")
