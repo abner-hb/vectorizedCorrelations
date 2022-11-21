@@ -1,14 +1,14 @@
 Package: vectorizedCorrelations
 Type: Package
 Title: Computes Pearson and Kendall Correlations
-Version: 0.5.1
+Version: 0.5.2
 Author: Abner Heredia Bustos
 Maintainer: Abner Heredia Bustos <113459290+abner-hb@users.noreply.github.com>
-Description: Compute correlations using only basic R operations and 
-    vectorization. It is a partial replication of the cor() function in package 
-    stats. This package can compute pearson and kendall correlations, but not spearman
-    correlations. For kendall correlations, it only computes some correlations.
-    And it does not have special handling of missing values.
+Description: Compute pearson and kendall correlations. using only basic R 
+    operations and vectorization. For kendall correlations, it only computes 
+    some correlations (see vignettes for details). And it does not have special 
+    handling of missing values. As such, it is a partial replication of the
+    cor() function in the stats package.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
